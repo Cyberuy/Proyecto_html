@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="./libs/jquery-3.4.1.min.js"></script>
+    <script src="./libs/handlebars-v4.1.2.js"></script>
+    <script src="./common.js"></script>
+    <script src="./obligatorio.js"></script>
+    <script src="./venta/venta.js"></script>
+    <title>Libreria</title>
+</head>
+
+<body background="./imagenes/textura papel.jpg" background-size:100% 100%;>
+    <header class="navbar navbar-expand flex-column flex-md-row bd-navbar">
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav bd-navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="btn btn-outline-info" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-info" href="./detalle/index.html">Detalles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-info" href="./venta/index.html">Venta</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-dark bg-primary">
+        <!-- ... -->
+    </nav>
+
+
+    <h1>Ingreso libro</h1>
+    <img src="imagenes/lomos libros 2.jpg" width="100" height="100" class="rounded float-left" alt="">
+
+
+    <p></p>
+    <form>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-1 col-form-label" style="background-color: rgb(255, 255, 255);">TITULO:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" id="txtTitulo" placeholder="Ingrese titulo">
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-1 col-form-label" style="background-color: rgb(255, 255, 255);">AUTOR:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" id="txtAutor" placeholder="Ingrese autor">
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-1 col-form-label" style="background-color: rgb(255, 255, 255);">ISBN:</label>
+            <div class="col-sm-3">
+                <input type="number" onkeydown="return event.keyCode !== 69" class="form-control" id="numbISBN" placeholder="Ingrese ISBN">
+            </div>
+
+
+
+            <label for="colFormLabel" class="col-sm-1 col-form-label" style="background-color: rgb(255, 255, 255);">TEMA:</label>
+            <div class="col-sm-3">
+                <select id="txtTema" class="form-control" placeholder="Ingrese tema">
+                    <option value="">Selecciona tema</option>
+                    <option style="background-color:orange  " value="policial">Policial</option>
+                    <option style="background-color:burlywood" value="novela">Novela</option>
+                    <option style="background-color:coral" value="terror">Terror</option>
+                    <option style="background-color:cyan" value="infantil">Infantil</option>
+                    <option style="background-color:darkkhaki" value="cocina">Cocina</option>
+                    <option style="background-color:darksalmon" value="autoayuda">Autoayuda</option>
+                    <option style="background-color:greenyellow" value="otros">Otros</option>
+                </select>
+
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-1 col-form-label" style="background-color: rgb(255, 255, 255);">STOCK:</label>
+            <div class="col-sm-3">
+                <input type="number" onkeydown="return event.keyCode !== 69" class="form-control" id="numbStock" placeholder="Ingrese stock">
+            </div>
+
+
+            <label for="colFormLabel" class="col-sm-1 col-form-label" style="background-color: rgb(255, 255, 255);">PRECIO $:</label>
+            <div class="col-sm-3">
+                <input type="number" onkeydown="return event.keyCode !== 69" class="form-control" id="numbPrecio" placeholder="Ingrese precio $">
+            </div>
+
+            <input type="button" value="Guardar" id="btn_guardar" class="btn btn-outline-danger" onclick="agregar()">
+        </div>
+    </form>
+
+    <p></p>
+    <p></p>
+
+    <center>
+        <input type="button" id="btn-toggle-tabla" value="Mostrar / Ocultar" class="btn btn-primary btn-lg">
+    </center>
+    <div>
+        <table class="table table-bordered table-hover">
+            <thead class="table-info">
+                <tr>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>ISBN</th>
+                    <th>Tema</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody id="libros-contenedor" style="background-color: rgb(255, 255, 255);">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="alert alert-success mx-auto" role="alert" style="display: none" id="libroAgregado">
+            Libro agregado !!
+        </div>
+        <div class="alert alert-danger mx-auto" role="alert" style="display: none" id="isbnExiste">
+            El ISBN ya existe, solo se agregará stock al libro !!
+        </div>
+        <div class="alert alert-success mx-auto" role="alert" style="display: none" id="libroVendido">
+            Libro Vendido !!
+        </div>
+    </div>
+</body>
+
+
+<script id="libro-template" type="text/x-handlebars-template">
+    <tr class="table">
+      <td>{{libro.titulo}}</td>
+      <td>{{libro.autor}}</td>
+      <td class="isbn_dato">{{libro.isbn}}</td>
+      <td style="background-color: {{colorTema}}">{{libro.tema}}</td>
+      <td class="stock_dato">{{libro.stock}}</td>
+      <td>{{libro.precio}}</td>
+    </tr>
+</script>
+
+
+</html>

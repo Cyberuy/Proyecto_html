@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="../libs/jquery-3.4.1.min.js"></script>
+    <script src="../libs/handlebars-v4.1.2.js"></script>
+    <script src="../common.js"></script>
+    <script src="../obligatorio.js"></script>
+    <script src="venta.js"></script>
+    <title>Venta</title>
+</head>
+
+<body background="../imagenes/textura papel.jpg" background-size:100% 100%;>
+    <header class="navbar navbar-expand flex-column flex-md-row bd-navbar">
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav bd-navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="btn btn-outline-info" href="../detalle/index.html">Detalles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-info" href="../obligatorio.html">Ingreso Libro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-info" href="../index.html">Inicio</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-dark bg-primary">
+        <!-- ... -->
+    </nav>
+
+    <h1>Venta de libro</h1>
+    <img src="../imagenes/compra.jpg" width="150" height="150" class="rounded float-left" alt="">
+
+
+    <input type="text" id="myInput" placeholder="Busqueda">
+    <input type="button" class="btn btn-outline-danger" value="BUSCAR" onclick="searchBook();">
+
+    <div id="libros-contenedor-resultado">
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>ISBN</th>
+                    <th>Tema</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="resultado">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="alert alert-danger mx-auto" role="alert" style="display: none" id="noExisteIsbn">
+            EL ISBN NO EXISTE, NO SE PUEDE VENDER EL LIBRO
+        </div>
+        <div class="alert alert-success mx-auto" role="alert" style="display: none" id="libroVendido">
+            Libro Vendido!
+        </div>
+    </div>
+
+</body>
+
+<script id="libro-template" type="text/x-handlebars-template">
+        <tr class="table">
+            <td>{{element.titulo}}</td>
+            <td>{{element.autor}}</td>
+            <td class="isbn_dato">{{element.isbn}}</td>
+            <td>{{element.tema}}</td>
+            <td>{{element.stock}}</td>
+            <td>{{element.precio}}</td>
+            <td>
+                <input type="button" value="Vender" class="btn btn-outline-danger" id="{{element.isbn}}" onclick="vendeLibro(this.id)">              
+            </td>
+
+        </tr>
+
+</script>
+
+</html>

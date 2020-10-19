@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="../libs/jquery-3.4.1.min.js"></script>
+    <script src="../libs/handlebars-v4.1.2.js"></script>
+    <script src="../common.js"></script>
+    <script src="./editar.js"></script>
+    <title>Editar</title>
+</head>
+
+<body background="../imagenes/textura papel.jpg" background-size:100% 100%;>
+    <header class="navbar navbar-expand flex-column flex-md-row bd-navbar">
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav bd-navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="btn btn-outline-info" href="../obligatorio.html">Ingreso libro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-info" href="../detalle/index.html">Detalles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-info" href="../venta/index.html">Venta</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div id="libro-contenedor" class="row">
+            
+            <img src="../imagenes/edicion de libro.png" width="100" height="100" class="rounded float-left" alt="">
+            <h1>Editar libro</h1>
+        </div>
+    </div>
+</body>
+
+<script id="libro-form-template" type="text/x-handlebars-template">
+    <div class="col-4">
+        <form id="libro-form">
+            <input type="button" id="libro-editar" class="btn btn-outline-primary"value="Editar"/>
+            <input type="text" class="input-editable" value="{{libro.titulo}}" readonly>
+            <input type="text" class="input-editable" value="{{libro.autor}}" readonly>
+            <input type="text" class="input-editable" value="{{libro.isbn}}" readonly>
+            <input type="text" class="input-editable" style="background-color: {{colorTema}}" value="{{libro.tema}}" readonly>
+            <input type="text" class="input-editable" value="{{libro.stock}}" readonly>
+            <input type="text" class="input-editable" value="{{libro.precio}}" readonly>
+            <input type="submit" class="btn btn-outline-danger" value="Guardar">
+            
+        </form>
+    </div>
+</script>
+
+</html>
